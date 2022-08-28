@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+                             import { Injectable } from '@angular/core';
 import { FeedItem, feedItemMocks } from '../models/feed-item.model';
 import { BehaviorSubject } from 'rxjs';
 

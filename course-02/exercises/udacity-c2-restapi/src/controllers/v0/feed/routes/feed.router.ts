@@ -3,6 +3,8 @@ import { FeedItem } from '../models/FeedItem';
 import { requireAuth } from '../../users/routes/auth.router';
 import * as AWS from '../../../../aws';
 
+import { PrimaryKey } from 'sequelize-typescript';
+
 const router: Router = Router();
 
 // Get all feed items
@@ -18,6 +20,21 @@ router.get('/', async (req: Request, res: Response) => {
 
 //@TODO
 //Add an endpoint to GET a specific resource by Primary Key
+router.get('/:id', async (req: Request, res: Response) => {
+
+    let { id } = req.params;
+
+    if(!id)
+        return res.status(400).send('Id is required');
+
+    const feed = await FeedItem.findById(id);
+    if (!feed)
+        {
+            return res.status(400).send('feed with id ${id} is not found');
+        }
+        return res.status(200).send(feed);
+    }
+);
 
 // update a specific resource
 router.patch('/:id', 
